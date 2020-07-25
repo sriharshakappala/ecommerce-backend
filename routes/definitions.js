@@ -19,4 +19,10 @@
  *        quantity:
  *          type: number
  *          example: 5
+ *   account_create:
+ *     type: object
+ *     properties:
+ *        email:
+ *          type: string
+ *          example: "example@example.com"
  */

@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const inventorySchema = new Schema({
-  name: String,
+  name: {
+    type: String,
+    unique: true,
+  },
   quantity: Number,
   created_at: Date,
   updated_at: Date

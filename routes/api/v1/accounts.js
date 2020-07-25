@@ -2,8 +2,7 @@ const _ = require('lodash');
 const express = require('express');
 const router = new express.Router();
 
-const Inventory = require('../../../src/models/inventory');
-
+const Account = require('../../../src/models/account');
 
 /**
  * @swagger
@@ -20,8 +19,13 @@ const Inventory = require('../../../src/models/inventory');
  *         description: OK
  */
 router.get('/', (req, res) => {
-  console.log(req);
-  res.status(200).send("test stuff");
+  Account.find({}, (err, accounts) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(accounts);
+    }
+  });
 });
 
 /**
@@ -50,12 +54,15 @@ router.get('/', (req, res) => {
  *         description: OK
  */
 router.post('/create', (req, res) => {
-  const newAccount = Account(req.body.account);
-  newAccount.save((err) => {
+  const newAccount = Account(req.body);
+  newAccount.save((err, account) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      res.status(200).send('Account saved successfully!');
+      res.status(200).send({
+        msg: 'Account saved successfully!',
+        product: account
+      });
     }
   })
   // res.status(200).send("test stuff");
