@@ -70,4 +70,47 @@ router.post('/create', (req, res) => {
   })
 });
 
+/**
+ * @swagger
+ * /api/v1/inventory/update:
+ *   post:
+ *     tags:
+ *       - inventory
+ *     summary: Update inventory
+ *     description: Update quantity of the product. This API increments the quantity of the product
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: body
+ *         in: body
+ *         description: The product id and the quantity
+ *         required:
+ *           - id
+ *           - quantity
+ *         schema:
+ *           $ref: '#/definitions/product_update'
+ *         properties:
+ *           id:
+ *             type: string
+ *           quantity:
+ *             type: number
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+router.post('/update', (req, res) => {
+  const id = req.body.id;
+  const quantity = req.body.quantity;
+  Inventory.findByIdAndUpdate(id, { $inc: { quantity : quantity } }, (err, product) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send({
+        msg: 'Product quantity updated successfully!',
+        product: product
+      });
+    }
+  });
+});
+
 module.exports = router;

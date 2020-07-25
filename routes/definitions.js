@@ -10,4 +10,13 @@
  *        quantity:
  *          type: number
  *          example: 10
+ *   product_update:
+ *     type: object
+ *     properties:
+ *        id:
+ *          type: string
+ *          example: '5f1c6311b91403286adaa783'
+ *        quantity:
+ *          type: number
+ *          example: 5
  */
