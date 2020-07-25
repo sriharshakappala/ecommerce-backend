@@ -19,8 +19,13 @@ const Inventory = require('../../../src/models/inventory');
  *         description: OK
  */
 router.get('/', (req, res) => {
-  console.log(req);
-  res.status(200).send("test stuff");
+  Inventory.find({}, (err, products) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(products);
+    }
+  });
 });
 
 /**
@@ -52,12 +57,15 @@ router.get('/', (req, res) => {
  *         description: OK
  */
 router.post('/create', (req, res) => {
-  const newInventory = Inventory(req.body.product);
-  newInventory.save((err) => {
+  const newInventory = Inventory(req.body);
+  newInventory.save((err, product) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      res.status(200).send('Product saved successfully!');
+      res.status(200).send({
+        msg: 'Product saved successfully!',
+        product: product
+      });
     }
   })
 });
