@@ -3,6 +3,7 @@ const _ = require('lodash');
 const Account = require('../models/account');
 const Inventory = require('../models/inventory');
 
+// This function validates the user account
 const validateOrderPlacedAccount = async (accountId) => {
   const account = await Account.findById(accountId);
   if (account && account.errors == undefined) {
@@ -17,6 +18,7 @@ const validateOrderPlacedAccount = async (accountId) => {
   }
 }
 
+// This function validates the item quantity and checks for invalid products during order creation
 const validateOrderItems = async (orderItems) => {
   productIds = _.map(orderItems, 'product_id')
   let products = await Inventory.find({"_id": {$in : productIds}});

@@ -24,4 +24,17 @@ Assumed below validations on schema
 3. `src/validators` - Validator functions on business objects
 4. `src/services` - Service Layer / Business Logic
 
-## TODO
+## List of APIs and functionalities
+1. Create account / user
+2. Get all accounts / users
+3. Add a new product into the inventory (name and quantity)
+4. Update the quantity of a product in the inventory
+5. View all the products in the inventory
+6. Create order
+7. View all orders
+8. Reduce the inventory once order is placed successfully
+9. Validate account information, product availability and presence before creating an order
+
+## Extensible / Good to have features (Incomplete List)
+1. Price tagging on product and price calculations when order placed
+2. Bypass invalid products and place the order with all other valid products in order create API
