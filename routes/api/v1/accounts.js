@@ -65,7 +65,6 @@ router.post('/create', (req, res) => {
       });
     }
   })
-  // res.status(200).send("test stuff");
 });
 
 module.exports = router;
