@@ -23,7 +23,6 @@ const validateOrderItems = async (orderItems) => {
   if (products.length !== orderItems.length) {
     return {error: 'Some of the products in this order are invalid'}
   }
-  console.log(products);
   items = []
   let error;
   products.forEach(p => {
