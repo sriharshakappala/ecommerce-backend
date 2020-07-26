@@ -70,10 +70,9 @@ router.post('/create', async (req, res) => {
     res.status(404).send({
       msg: 'Order creation failed!',
       reason: items.error
-    })
+    });
+    return;
   }
-  console.log(items);
-  console.log(account);
   const newOrder = Order({
     order_placed_by: account.order_placed_by,
     items: items,
