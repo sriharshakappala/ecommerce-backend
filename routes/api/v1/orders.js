@@ -4,6 +4,8 @@ const router = new express.Router();
 
 const Order = require('../../../src/models/order');
 
+const orderValidator = require('../../../src/validators/order-validator')
+
 /**
  * @swagger
  * /api/v1/orders:
@@ -53,7 +55,24 @@ router.get('/', (req, res) => {
  *       200:
  *         description: OK
  */
-router.post('/create', (req, res) => {
+router.post('/create', async (req, res) => {
+  let account = await orderValidator.validateOrderPlacedAccount(req.body.order_placed_by);
+  if (account.error) {
+    res.status(404).send({
+      msg: 'Order creation failed!',
+      reason: account.error
+    });
+    return;
+  }
+  let items = await orderValidator.validateOrderItems(req.body.products);
+  if (items.error) {
+    res.status(404).send({
+      msg: 'Order creation failed!',
+      reason: items.error
+    })
+  }
+  console.log(items);
+  console.log(account);
   const newOrder = Order(req.body);
   newOrder.save((err, order) => {
     if (err) {
