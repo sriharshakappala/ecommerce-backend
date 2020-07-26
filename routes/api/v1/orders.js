@@ -4,7 +4,8 @@ const router = new express.Router();
 
 const Order = require('../../../src/models/order');
 
-const orderValidator = require('../../../src/validators/order-validator')
+const orderValidator = require('../../../src/validators/order-validator');
+const inventoryService = require('../../../src/services/inventory-service');
 
 /**
  * @swagger
@@ -73,15 +74,19 @@ router.post('/create', async (req, res) => {
   }
   console.log(items);
   console.log(account);
-  const newOrder = Order(req.body);
+  const newOrder = Order({
+    order_placed_by: account.order_placed_by,
+    items: items,
+  });
   newOrder.save((err, order) => {
     if (err) {
       res.status(500).send(err);
     } else {
       res.status(200).send({
         msg: 'Order placed successfully!',
-        product: order
+        order: order
       });
+      inventoryService.updateInventory(req.body.products);
     }
   });
 });
