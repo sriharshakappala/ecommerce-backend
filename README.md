@@ -36,5 +36,6 @@ Assumed below validations on schema
 9. Validate account information, product availability and presence before creating an order
 
 ## Extensible / Good to have features (Incomplete List)
-1. Price tagging on product and price calculations when order placed
-2. Bypass invalid products and place the order with all other valid products in order create API
+1. Race conditions on inventory updates and inventory checks before order placing can be done by using a read through write through cache mechanism (using Redis) and use Redis locks for the duration of read and update operation or by using a hash table.
+2. Price tagging on product and price calculations when order placed
+3. Bypass invalid products and place the order with all other valid products in order create API
