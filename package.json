@@ -16,7 +16,7 @@
     "ajv": "^5.5.2",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "mongoose": "^5.9.25",
     "mongoose-unique-validator": "^2.0.3",
     "npm-force-resolutions": "0.0.3",
